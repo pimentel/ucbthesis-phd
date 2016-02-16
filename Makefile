@@ -1,0 +1,19 @@
+BASE_DIRECTORY=$(CURDIR)
+
+INPUT_DIRECTORY=$(BASE_DIRECTORY)/src
+OUTPUT_DIRECTORY=$(BASE_DIRECTORY)/output
+AUXILIARY_DIRECTORY=$(BASE_DIRECTORY)/aux
+
+pdf:
+	cd $(INPUT_DIRECTORY) && \
+	latexmk \
+	-pdf \
+	-f \
+	-aux-directory=$(AUXILIARY_DIRECTORY) \
+	-output-directory=$(OUTPUT_DIRECTORY) \
+	thesis
+
+clean:
+	rm -rf \
+	$(OUTPUT_DIRECTORY) \
+	$(AUXILIARY_DIRECTORY)
