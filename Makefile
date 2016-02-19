@@ -6,14 +6,14 @@ FINAL_DIRECTORY=$(BASE_DIRECTORY)/pdf
 
 all: link
 
-approval:
+$(OUTPUT_DIRECTORY)/approvalpage.pdf: $(INPUT_DIRECTORY)/approvalpage.tex
 	cd $(INPUT_DIRECTORY) && \
 	latexmk \
 	-pdf \
 	-output-directory=$(OUTPUT_DIRECTORY) \
 	approvalpage
 
-pdf:
+$(OUTPUT_DIRECTORY)/thesis.pdf: $(INPUT_DIRECTORY)/thesis.tex
 	cd $(INPUT_DIRECTORY) && \
 	latexmk \
 	-pdf \
@@ -22,7 +22,7 @@ pdf:
 	-output-directory=$(OUTPUT_DIRECTORY) \
 	thesis
 
-link: pdf approval
+link: $(OUTPUT_DIRECTORY)/thesis.pdf $(OUTPUT_DIRECTORY)/approvalpage.pdf
 	mkdir -p $(FINAL_DIRECTORY) && \
 	ln -snf $(OUTPUT_DIRECTORY)/thesis.pdf $(FINAL_DIRECTORY)
 	ln -snf $(OUTPUT_DIRECTORY)/approvalpage.pdf $(FINAL_DIRECTORY)
